@@ -1,3 +1,4 @@
+import {useExperienceNavigate} from '../components/LoadingExperience';
 import React,{useRef,useState} from 'react';
 import {Link,useNavigate,useSearchParams} from 'react-router-dom';
 import {ArrowLeft,ArrowRight,ArrowUpRight,Eye,EyeOff,KeyRound,LockKeyhole,Mail,Phone,ShieldCheck,Smartphone} from 'lucide-react';
@@ -27,7 +28,7 @@ export default function Auth({register=false}){
  const confirmation=useRef(null);
  const verifier=useRef(null);
  const {login}=useStore();
- const navigate=useNavigate();
+ const navigate=useExperienceNavigate();
  const next=params.get('next')?.startsWith('/')&&!params.get('next')?.startsWith('//')?params.get('next'):'/account';
  async function finish(idToken){const {data}=await api.post('/auth/firebase',{idToken});login(data);toast.success('Welcome to NORTHLINE!');navigate(next)}
  async function submit(e){e.preventDefault();setBusy(true);try{const{data}=await api.post('/auth/'+(register?'register':'login'),form);login(data);toast.success(register?'Your account is ready!':'Welcome back!');navigate(next)}catch(e){toast.error(explain(e))}finally{setBusy(false)}}

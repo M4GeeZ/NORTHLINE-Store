@@ -1,3 +1,4 @@
+import {useExperienceNavigate} from '../components/LoadingExperience';
 import React,{useState} from 'react';
 import {Link,useNavigate} from 'react-router-dom';
 import {ArrowLeft,ArrowRight,CheckCircle2,Eye,EyeOff,KeyRound,LockKeyhole,Mail,ShieldCheck} from 'lucide-react';
@@ -6,7 +7,7 @@ import {api} from '../context/Store';
 import {ActionSpinner} from '../components/LoadingExperience';
 export default function ForgotPassword(){
  const [step,setStep]=useState(0),[email,setEmail]=useState(''),[code,setCode]=useState(''),[password,setPassword]=useState(''),[confirm,setConfirm]=useState(''),[show,setShow]=useState(false),[busy,setBusy]=useState(false),[session,setSession]=useState(null);
- const nav=useNavigate();
+ const nav=useExperienceNavigate();
  async function proceed(e){e.preventDefault();setBusy(true);try{
   if(step===0){await api.post('/auth/forgot/request',{email});setStep(1);toast.success('If this email has a password account, a code is on its way.');}
   if(step===1){const{data}=await api.post('/auth/forgot/verify',{email,code});setSession(data);setStep(2);toast.success('Email verified. Choose a new password.');}

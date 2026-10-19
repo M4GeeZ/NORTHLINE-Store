@@ -1,9 +1,13 @@
 /* NORTHLINE — understated editorial loading experience */
-.nl-experience{--nl-progress-duration:2700ms;position:fixed;inset:0;z-index:4000;display:grid;place-items:center;overflow:hidden;background:#f1f2ea;color:#21382b;isolation:isolate;will-change:transform;transform:translate3d(0,0,0);transition:transform 850ms cubic-bezier(.76,0,.24,1),visibility 0s linear 850ms;}
-.nl-experience.is-visible{visibility:visible;pointer-events:auto;transform:translate3d(0,0,0)}
-/* As the bottom edge rises to the top, the whole cream preloader reveals the page from bottom to top. */
-.nl-experience.is-finished{visibility:hidden;pointer-events:none;transform:translate3d(0,-105%,0)}
-.nl-experience.is-route{--nl-progress-duration:1900ms}
+/* Screen stays covered BEFORE React Router changes the visible page. */
+.nl-experience{position:fixed;inset:0;z-index:4000;display:grid;place-items:center;overflow:hidden;background:#f1f2ea;color:#21382b;isolation:isolate;will-change:opacity,transform;transform:translate3d(0,0,0);opacity:1;visibility:visible;pointer-events:auto;transition:none}
+.nl-experience.is-cover{opacity:1;visibility:visible;transform:translate3d(0,0,0);pointer-events:auto}
+.nl-experience.is-exit{pointer-events:auto}
+/* Only first load slides the entire cream panel upward. */
+.nl-experience.is-initial.is-exit{transform:translate3d(0,-105%,0);transition:transform var(--nl-exit-duration) cubic-bezier(.76,0,.24,1)}
+/* Product links and normal internal pages ONLY fade away. */
+.nl-experience.is-page.is-exit,.nl-experience.is-item.is-exit{opacity:0;transition:opacity var(--nl-exit-duration) ease-in-out}
+.nl-experience.is-hidden{visibility:hidden;opacity:0;pointer-events:none;transition:none}
 .nl-experience-grain{position:absolute;inset:0;pointer-events:none;opacity:.42;background:radial-gradient(ellipse 70% 65% at 50% 48%,#e5e9df 0%,transparent 80%)}
 .nl-experience:before,.nl-experience:after{position:absolute;content:'';width:min(33vw,250px);height:min(33vw,250px);border:1px solid #2d48311c;border-radius:50%;pointer-events:none}
 .nl-experience:before{top:-13vw;right:-10vw}.nl-experience:after{bottom:-15vw;left:-10vw}
@@ -18,15 +22,15 @@
 .nl-experience-rule{width:clamp(145px,24vw,234px);height:2px;margin-top:25px;background:#cad3c5;overflow:hidden;position:relative}
 /* True progressive fill, not a looping sliding strip. The animation finishes at exactly 100%. */
 .nl-experience-rule i{display:block;width:100%;height:100%;background:#2b5036;transform:scaleX(0);transform-origin:left center}
-.nl-experience.is-visible .nl-experience-rule i{animation:nl-progress-fill var(--nl-progress-duration) cubic-bezier(.32,.02,.55,1) both}
-.nl-experience.is-finished .nl-experience-rule i{transform:scaleX(1)}
+.nl-experience.is-cover .nl-experience-rule i{animation:nl-progress-fill var(--nl-progress-duration) cubic-bezier(.32,.02,.55,1) both}
+.nl-experience.is-exit .nl-experience-rule i{transform:scaleX(1)}
 .nl-experience-caption{font-weight:750;letter-spacing:.23em;font-size:9px;margin:18px 0 0;color:#708474}
 .nl-experience-corner{position:absolute;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:.21em;font-weight:750;color:#8c9b8a;white-space:nowrap}
 .nl-experience-corner--top{top:clamp(30px,6vh,64px)}.nl-experience-corner--bottom{bottom:clamp(25px,6vh,58px)}
-.nl-experience.is-route .nl-experience-symbol{width:50px;height:50px;margin-bottom:7px}
-.nl-experience.is-route .nl-experience-symbol>span{font-size:32px}
-.nl-experience.is-route .nl-experience-name{font-size:clamp(36px,4vw,48px)}
-.nl-experience.is-route .nl-experience-rule{margin-top:19px}
+.nl-experience.is-page .nl-experience-symbol,.nl-experience.is-item .nl-experience-symbol{width:50px;height:50px;margin-bottom:7px}
+.nl-experience.is-page .nl-experience-symbol>span,.nl-experience.is-item .nl-experience-symbol>span{font-size:32px}
+.nl-experience.is-page .nl-experience-name,.nl-experience.is-item .nl-experience-name{font-size:clamp(36px,4vw,48px)}
+.nl-experience.is-page .nl-experience-rule,.nl-experience.is-item .nl-experience-rule{margin-top:19px}
 @keyframes nl-star-turn{0%{transform:rotate(0)}48%{transform:rotate(78deg)}100%{transform:rotate(180deg)}}
 @keyframes nl-orbit-breathe{0%,100%{transform:scale(.88);opacity:.25}50%{transform:scale(1.11);opacity:1}}
 @keyframes nl-progress-fill{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
@@ -48,4 +52,4 @@ button[aria-busy="true"]{cursor:progress!important}
 .nl-busy-link,.nl-busy-button{transition:transform .22s ease,background-color .22s ease,box-shadow .22s ease}
 .nl-busy-button:not(:disabled):active,.nl-busy-link:active{transform:scale(.985)}
 @media(max-width:640px){.nl-experience-center{min-width:0}.nl-experience-name{font-size:48px}.nl-experience-corner{font-size:8px;letter-spacing:.12em}.nl-experience-caption{letter-spacing:.16em}}
-@media(prefers-reduced-motion:reduce){.nl-experience,.nl-experience-symbol>span,.nl-experience-symbol>i,.nl-experience-rule i,.nl-action-spinner,.nl-skeleton-photo:after,.nl-skeleton-line:after,.nl-product-loading .nl-loading-mark{animation:none!important;transition:none!important}.nl-experience-rule i{transform:scaleX(1)!important}.nl-experience.is-finished{display:none}}
+@media(prefers-reduced-motion:reduce){.nl-experience,.nl-experience-symbol>span,.nl-experience-symbol>i,.nl-experience-rule i,.nl-action-spinner,.nl-skeleton-photo:after,.nl-skeleton-line:after,.nl-product-loading .nl-loading-mark{animation:none!important;transition:none!important}.nl-experience-rule i{transform:scaleX(1)!important}.nl-experience.is-hidden{display:none}}
