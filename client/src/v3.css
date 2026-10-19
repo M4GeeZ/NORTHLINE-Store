@@ -1,0 +1,502 @@
+/* NORTHLINE V3 - retail design system; intentional custom layout, responsive and accessible */
+:root{--nl-ink:#202b24;--nl-forest:#22372c;--nl-moss:#78896f;--nl-warm:#c8a17c;--nl-paper:#faf9f5;--nl-parchment:#f0efe9;--nl-border:#e0e2db}
+html{scroll-padding-top:110px}
+body{background:var(--nl-paper)}
+.container{width:min(1420px,calc(100% - 104px))}
+.header{height:77px;background:rgba(250,249,245,.97)}
+.header-inner{gap:24px}
+.logo{font-size:34px;letter-spacing:-.078em}
+.logo>span{color:#9eab80}
+.main-nav{margin-left:auto;margin-right:auto;gap:25px}
+.main-nav a{font-size:11.5px}
+.header-icons{gap:17px}
+.nav-mobile-help{display:none!important}
+.announcement{background:#1b3026}
+.announcement-content{height:35px}
+.announcement-content>span:first-child,.announcement-content>span:last-child{font-size:9px;letter-spacing:.11em}
+.nl-kicker{font-size:10px;letter-spacing:.19em;font-weight:750;display:inline-flex;gap:15px;align-items:center;line-height:1.4}
+.nl-kicker i{display:inline-block;width:30px;height:1px;background:currentColor;opacity:.8}
+.nl-section{padding-block:105px 116px}
+.nl-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:45px;margin-bottom:38px}
+.nl-section-head h2{font-size:clamp(43px,5.3vw,78px);line-height:1.02;letter-spacing:-.068em;font-weight:500;margin:17px 0 0}
+.nl-section-head h2 em,.nl-lookbook-story h2 em{font-family:var(--serif);font-weight:400;color:#849276}
+.nl-section-head-right{width:305px;flex-shrink:0;margin-bottom:5px}
+.nl-section-head-right p{color:#657368;line-height:1.75;font-size:13.5px;margin:0 0 24px}
+.nl-underline-link{font-size:12px;display:inline-flex;align-items:center;gap:16px;font-weight:750;border-bottom:1px solid #718274;padding-bottom:9px;transition:gap .25s,color .25s;white-space:normal}
+.nl-underline-link:hover{gap:24px;color:#7c966d}
+.nl-action-primary,.nl-button-outline{min-height:54px;padding:16px 23px;display:inline-flex;align-items:center;justify-content:center;gap:25px;font-size:12px;font-weight:750;letter-spacing:.01em;transition:transform .25s,background .25s,color .25s}
+.nl-action-primary{background:#f8f7f1;color:#20342a;border:1px solid #f8f7f1}
+.nl-action-primary:hover{background:#dce5a3;transform:translateY(-3px)}
+.nl-button-outline{background:transparent;border:1px solid #6c7c6d;color:#263b2d}
+.nl-button-outline:hover{background:#253c2e;color:white;transform:translateY(-2px)}
+.nl-hero{height:min(780px,calc(100svh - 112px));min-height:640px;background:#263b2e;position:relative;overflow:hidden;color:#fff}
+.nl-hero-bg,.nl-hero-shade{position:absolute;inset:0}
+.nl-hero-bg img{height:100%;width:100%;object-fit:cover;object-position:center 58%;filter:saturate(.78) brightness(.85)}
+.nl-hero-shade{background:linear-gradient(90deg,rgba(14,30,23,.85) 0%,rgba(15,32,23,.58) 43%,rgba(17,31,24,.05) 83%),linear-gradient(0deg,rgba(15,32,24,.45),transparent 27%)}
+.nl-hero-content{position:relative;z-index:1;padding-top:clamp(140px,16vh,225px)}
+.nl-hero-small{display:inline-flex;align-items:center;gap:14px;font-size:10px;letter-spacing:.2em;font-weight:700}
+.nl-hero-small>span{height:1px;width:39px;background:#fff}
+.nl-hero h1{font-size:clamp(68px,8.1vw,131px);font-weight:500;letter-spacing:-.075em;line-height:.93;margin:28px 0 29px;max-width:950px}
+.nl-hero h1 em,.nl-wide-content h2 em,.nl-bottom-banner h2 em,.nl-quote-band h2 em,.nl-feature-page-hero h1 em,.nl-page-closer h2 em{font-family:var(--serif);font-weight:400;letter-spacing:-.045em;color:#e9ecd2}
+.nl-hero-content>p{font-size:15px;line-height:1.8;max-width:395px;margin:0 0 30px;color:#e8eee9}
+.nl-hero-buttons{display:flex;gap:35px;align-items:center}
+.nl-action-quiet{font-size:12px;display:flex;align-items:center;gap:13px;border-bottom:1px solid #f6f6eb;padding-bottom:9px;transition:gap .2s}
+.nl-action-quiet:hover{gap:22px}
+.nl-hero-foot{position:absolute;bottom:29px;left:50%;transform:translateX(-50%);z-index:1;display:flex;justify-content:space-between;align-items:center;font-size:9px;letter-spacing:.13em;font-weight:750}
+.nl-hero-foot a{display:flex;align-items:center;gap:12px}
+.nl-hero-vertical{position:absolute;right:26px;top:43%;writing-mode:vertical-rl;letter-spacing:.2em;font-size:9px;font-weight:700}
+.nl-promises{border-bottom:1px solid var(--nl-border);background:#ebece5}
+.nl-promises-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding-block:23px}
+.nl-promises-grid>div{display:flex;gap:15px;align-items:center;min-width:0;border-right:1px solid #d4d9ce;padding-right:8px}
+.nl-promises-grid>div:last-child{border:0}
+.nl-promises-grid svg{flex-shrink:0;stroke-width:1.5}
+.nl-promises-grid strong,.nl-promises-grid small{display:block}
+.nl-promises-grid strong{font-size:11.5px;font-weight:750}
+.nl-promises-grid small{font-size:10px;color:#6d7b70;margin-top:4px}
+.nl-collections-section{padding-top:117px}
+.nl-collections-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.nl-collection-card{min-width:0}
+.nl-collection-media{position:relative;background:#e7e7df;overflow:hidden;aspect-ratio:3/4}
+.nl-collection-media img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.22,.8,.25,1),filter .3s;filter:saturate(.83)}
+.nl-collection-card:hover img{transform:scale(1.075);filter:saturate(1)}
+.nl-collection-index{position:absolute;top:17px;left:19px;background:#f9f8f3e8;padding:9px 12px;font-weight:750;font-size:9px;letter-spacing:.14em}
+.nl-collection-text{display:flex;align-items:end;justify-content:space-between;padding:22px 0 0;gap:6px}
+.nl-collection-text span:not(.nl-circle-arrow){color:#899384;font-size:10px;font-weight:650;letter-spacing:.03em}
+.nl-collection-text h3{font-weight:600;letter-spacing:-.045em;font-size:clamp(23px,2.2vw,31px);margin:7px 0 0}
+.nl-circle-arrow{width:41px;height:41px;border-radius:50%;border:1px solid #cbd2c7;display:grid;place-items:center;transition:background .2s}
+.nl-collection-card:hover .nl-circle-arrow{background:#dce5ac;border-color:#dce5ac}
+.nl-editor-note{background:#e3e9dd;padding:55px 0}
+.nl-editor-inner{display:flex;align-items:center;gap:38px}
+.nl-editor-mark{font-size:64px;font-weight:700;letter-spacing:-.12em;line-height:1;min-width:130px}
+.nl-editor-mark span{font-size:32px;color:#80946f;vertical-align:super;margin-left:7px}
+.nl-editor-inner p{font-size:clamp(19px,2.2vw,30px);line-height:1.37;letter-spacing:-.025em;font-weight:500;flex:1;max-width:770px;margin:0}
+.nl-editor-signature{font-size:9px;letter-spacing:.13em;font-weight:750;width:172px;color:#667b67}
+.nl-category-chips{display:flex;flex-wrap:wrap;gap:9px;margin:-7px 0 31px}
+.nl-category-chips button{border:1px solid #d5dbd1;background:transparent;padding:11px 19px;color:#526156;font-size:12px;font-weight:650;transition:.2s}
+.nl-category-chips button.active,.nl-category-chips button:hover{background:#21392b;color:#fff;border-color:#21392b}
+.nl-featured-grid{min-height:300px}
+.nl-catalog-status{background:#eaf0e4;border-left:3px solid #829671;color:#506753;font-size:11.5px;padding:12px 17px;display:flex;align-items:center;gap:9px;margin-bottom:25px}
+.nl-center-cta{display:flex;justify-content:center;margin-top:53px}
+.nl-split-feature{display:grid;grid-template-columns:1.08fr .92fr;min-height:620px;background:#e9ece5}
+.nl-split-image{min-height:620px;position:relative;overflow:hidden}
+.nl-split-image>img{height:100%;width:100%;object-fit:cover;position:absolute;inset:0}
+.nl-image-caption{position:absolute;bottom:30px;left:30px;background:#f6f5ef;padding:13px 17px;font-size:9px;font-weight:750;letter-spacing:.13em}
+.nl-split-text{padding:clamp(70px,8vw,133px) min(10vw,135px) 90px 8vw;position:relative}
+.nl-split-text h2{font-size:clamp(55px,5.4vw,87px);font-weight:500;letter-spacing:-.07em;line-height:1.03;margin:25px 0}
+.nl-split-text h2 em{font-family:var(--serif);color:#88977a;font-weight:400}
+.nl-split-text p{font-size:14px;color:#627164;line-height:1.95;max-width:410px;margin-bottom:32px}
+.nl-feature-number{position:absolute;bottom:25px;font-size:10px;letter-spacing:.12em;font-weight:700;color:#8c998c}
+.nl-wide-promo{height:570px;position:relative;color:white;background:#26382b;overflow:hidden}
+.nl-wide-promo>img,.nl-wide-overlay{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.nl-wide-promo>img{filter:saturate(.78) brightness(.74)}
+.nl-wide-overlay{background:linear-gradient(90deg,rgba(15,36,22,.85),rgba(17,39,28,.36) 67%,transparent)}
+.nl-wide-content{position:relative;z-index:1;padding-top:121px}
+.nl-wide-content h2{font-size:clamp(55px,6vw,95px);letter-spacing:-.065em;font-weight:500;line-height:1.02;margin:24px 0}
+.nl-wide-content>p{max-width:390px;line-height:1.8;font-size:14px;color:#e2eae3;margin-bottom:31px}
+.nl-lookbook-grid{display:grid;grid-template-columns:1fr 1fr;gap:23px}
+.nl-lookbook-tile{height:500px;position:relative;overflow:hidden;background:#ddd}
+.nl-lookbook-tile img{height:100%;width:100%;object-fit:cover;transition:transform .7s}
+.nl-lookbook-tile:hover img{transform:scale(1.05)}
+.nl-lookbook-tile:after{position:absolute;content:'';inset:30% 0 0;background:linear-gradient(0deg,#142a20b0,transparent);pointer-events:none}
+.nl-lookbook-tile>div{position:absolute;bottom:34px;left:34px;right:34px;color:#fff;z-index:1}
+.nl-lookbook-tile small{letter-spacing:.14em;font-weight:750;font-size:10px}
+.nl-lookbook-tile h3{font-size:clamp(24px,2.8vw,38px);letter-spacing:-.04em;font-weight:550;max-width:340px;margin:13px 0}
+.nl-lookbook-tile svg{position:absolute;right:0;bottom:3px}
+.nl-quote-band{background:#e2e7d9;text-align:center;padding:97px 0 105px}
+.nl-quote-band .nl-kicker{justify-content:center;color:#677d66}
+.nl-quote-band h2{font-size:clamp(34px,4vw,66px);font-weight:500;line-height:1.13;letter-spacing:-.05em;margin:22px 0}
+.nl-quote-band h2 em{color:#7e9478}
+.nl-quote-band p{font-size:10px;letter-spacing:.16em;font-weight:700;color:#748276}
+.nl-journal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.nl-journal-card>div:first-child{position:relative;overflow:hidden;height:330px;background:#e3e7df}
+.nl-journal-card img{height:100%;width:100%;object-fit:cover;transition:transform .6s}
+.nl-journal-card:hover img{transform:scale(1.06)}
+.nl-journal-index{position:absolute;top:16px;left:16px;background:#faf9f4;padding:10px;font-size:10px;font-weight:750}
+.nl-journal-card>span:nth-child(2){font-size:9px;letter-spacing:.15em;font-weight:750;color:#839084;display:block;margin:23px 0 11px}
+.nl-journal-card h3{font-size:clamp(23px,2.5vw,33px);line-height:1.17;font-weight:550;letter-spacing:-.04em;margin:0 0 20px}
+.nl-journal-card>p{font-size:13px;color:#7a897d;line-height:1.8}
+.nl-journal-read{font-size:11px;font-weight:750;border-bottom:1px solid #869589;display:inline-flex;gap:11px;padding-bottom:9px;align-items:center}
+.nl-bottom-banner{padding-block:85px;background:#e4e9df}
+.nl-bottom-banner>.container{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nl-bottom-banner h2{font-size:clamp(47px,5.3vw,76px);line-height:1;letter-spacing:-.065em;font-weight:500;margin:17px 0 0}
+.nl-bottom-banner h2 em{color:#7a917a}
+.nl-bottom-banner .nl-action-primary{background:#1f3527;color:white;border-color:#1f3527}
+.nl-bottom-banner .nl-action-primary:hover{background:#425741}
+.nl-long-page{min-height:65vh}
+.nl-feature-page-hero{background:#e9ede5;padding:110px 0 100px}
+.nl-feature-page-hero h1{font-size:clamp(70px,8vw,118px);line-height:.95;letter-spacing:-.073em;font-weight:500;margin:25px 0 28px}
+.nl-feature-page-hero h1 em{color:#83977b}
+.nl-feature-page-hero p{font-size:15px;line-height:1.7;max-width:520px;color:#687869;margin:0}
+.nl-lookbook-page-grid{padding-top:100px;display:grid;gap:100px}
+.nl-lookbook-story{display:grid;grid-template-columns:1.1fr .9fr;min-height:480px;gap:9vw;align-items:center}
+.nl-lookbook-story:nth-child(even){grid-template-columns:.9fr 1.1fr}
+.nl-lookbook-story:nth-child(even) .nl-lookbook-story-photo{order:2}
+.nl-lookbook-story-photo{height:550px;background:#e5e5df;overflow:hidden}
+.nl-lookbook-story-photo img{height:100%;width:100%;object-fit:cover;transition:transform .6s}
+.nl-lookbook-story-photo:hover img{transform:scale(1.03)}
+.nl-lookbook-story-copy h2{font-size:clamp(40px,4.1vw,66px);font-weight:500;letter-spacing:-.06em;line-height:1.08;margin:24px 0}
+.nl-lookbook-story-copy p{font-size:14px;color:#667468;line-height:1.9;max-width:390px;margin-bottom:30px}
+.nl-page-closer{text-align:center;padding:130px 0}
+.nl-page-closer h2{font-size:clamp(40px,5vw,76px);font-weight:500;line-height:1.08;letter-spacing:-.06em;margin:0 0 37px}
+.nl-page-closer h2 em{color:#7d9876}
+.nl-page-closer .nl-action-primary{background:#25392b;color:white}
+.nl-journal-hero{background:#e6ebe3}
+.nl-article-heading{text-align:center;padding-block:90px 70px}
+.nl-article-heading>.nl-underline-link{margin-bottom:55px}
+.nl-article-heading h1{font-size:clamp(53px,6.5vw,94px);font-weight:500;max-width:1000px;margin:23px auto;line-height:1.02;letter-spacing:-.07em}
+.nl-article-heading>p{color:#738073;font-size:17px;max-width:580px;line-height:1.8;margin:0 auto}
+.nl-article-hero{width:min(1420px,calc(100% - 104px));margin:auto;height:650px;overflow:hidden;background:#e6e6e0}
+.nl-article-hero img{height:100%;width:100%;object-fit:cover}
+.nl-article-content{width:min(740px,calc(100% - 40px));margin:0 auto;padding:65px 0 110px}
+.nl-article-intro{font-size:22px!important;color:#34483a!important;line-height:1.65!important}
+.nl-article-content section{margin:46px 0}
+.nl-article-content h2{font-size:32px;letter-spacing:-.045em;font-weight:550}
+.nl-article-content section p{font-size:16px;color:#617365;line-height:2}
+.nl-article-summary{border-block:1px solid #c6d0c5;text-align:center;padding:32px;font-size:11px;font-weight:750;letter-spacing:.2em;margin:48px 0 32px}
+.nl-article-content .nl-action-primary{background:#21372a;color:#fff}
+.nl-article-related{padding-bottom:110px}
+.nl-article-related>h2{font-size:40px;font-weight:500;letter-spacing:-.05em;margin-bottom:32px}
+.nl-contact-grid{display:grid;grid-template-columns:.72fr 1fr;gap:9vw;padding-block:110px 150px}
+.nl-contact-details>h2{font-size:53px;font-weight:500;letter-spacing:-.065em;margin:20px 0}
+.nl-contact-details>p{font-size:15px;line-height:1.85;color:#718274;margin-bottom:48px}
+.nl-contact-method{display:flex;gap:21px;padding:26px 0;border-top:1px solid #d8dfd5}
+.nl-contact-method svg{flex-shrink:0;stroke-width:1.4}
+.nl-contact-method h3{font-size:18px;margin:0 0 8px;font-weight:600}
+.nl-contact-method p{color:#758575;font-size:13px;line-height:1.7;margin:0}
+.nl-contact-help{background:#e9eee4;padding:26px;margin-top:40px}
+.nl-contact-help>p{font-weight:650;font-size:16px;margin-top:0}
+.nl-contact-form-wrap{background:#edf0e9;padding:58px}
+.nl-contact-form h2{font-size:36px;font-weight:500;letter-spacing:-.055em;margin:16px 0 33px}
+.nl-contact-form .form-grid{gap:18px}
+.nl-contact-form label{font-size:10px;font-weight:750;letter-spacing:.1em}
+.nl-contact-form input,.nl-contact-form select,.nl-contact-form textarea{background:white;border:1px solid #d5dcd2;border-radius:0}
+.nl-contact-form textarea{resize:vertical}
+.nl-contact-form .nl-action-primary,.nl-contact-success .nl-button-outline{margin-top:26px;background:#243b2e;color:white}
+.nl-form-note{font-size:11px!important;color:#7c8c7d;line-height:1.7}
+.nl-contact-success{padding:60px 12px;text-align:center}
+.nl-contact-success svg{margin-inline:auto;color:#677d64}
+.nl-contact-success h2{font-size:50px;font-weight:500;letter-spacing:-.06em}
+.nl-contact-success p{font-size:14px;line-height:1.9;color:#6e7b6d}
+.nl-faq-body{display:grid;grid-template-columns:290px 1fr;gap:10vw;padding-block:95px 150px}
+.nl-faq-menu>button{display:flex;align-items:center;justify-content:space-between;background:none;border:0;border-bottom:1px solid #d8dfd7;padding:18px 0;width:100%;text-align:left;font-size:14px;color:#768677;transition:color .2s}
+.nl-faq-menu>button:first-of-type{margin-top:23px}
+.nl-faq-menu>button.active{color:#203729;font-weight:750}
+.nl-faq-menu>button span{font-size:10px;color:#91a08f}
+.nl-faq-aside-card{background:#e9ede4;padding:30px;margin-top:45px}
+.nl-faq-aside-card h3{font-size:23px;letter-spacing:-.05em}
+.nl-faq-aside-card p{font-size:13px;color:#758575;line-height:1.8}
+.nl-faq-answers h2{font-size:clamp(37px,4vw,59px);letter-spacing:-.06em;line-height:1.09;font-weight:500;margin:20px 0 30px}
+.nl-faq-row{border-top:1px solid #d6dcd5}
+.nl-faq-row>button{width:100%;padding:24px 0;background:none;border:0;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;font-size:16px;font-weight:600}
+.nl-faq-row>button svg{flex-shrink:0}
+.nl-faq-row>p{margin:0;padding:0 35px 26px 0;color:#6c7e6c;font-size:14px;line-height:1.85}
+.nl-faq-tip{background:#edf0e8;display:flex;gap:16px;padding:26px;margin-top:44px;font-size:12px;line-height:1.9;color:#728174}
+.nl-faq-tip svg{flex-shrink:0}
+.nl-faq-tip strong{color:#253b2c}
+.nl-policy-body{display:grid;grid-template-columns:250px 1fr;gap:9vw;padding-block:100px 150px}
+.nl-policy-side{display:flex;flex-direction:column;gap:18px}
+.nl-policy-side>span{font-size:10px;color:#899785;letter-spacing:.11em;font-weight:750;margin-bottom:10px}
+.nl-policy-side a{font-size:13px;line-height:1.5;color:#708171;border-left:2px solid transparent;padding:5px 0 5px 16px}
+.nl-policy-side a.active{border-color:#355540;color:#1e3927;font-weight:750}
+.nl-policy-note{background:#e5ebe2;padding:21px;color:#547057;font-size:13px;line-height:1.7}
+.nl-policy-body article>section{display:grid;grid-template-columns:55px 1fr;gap:30px;padding:28px 0;border-bottom:1px solid #d8dfd7}
+.nl-policy-body article>section>span{font-size:10px;color:#879588;font-weight:700}
+.nl-policy-body article h2{margin:0 0 14px;font-size:29px;font-weight:550;letter-spacing:-.05em}
+.nl-policy-body article section p{margin:0 0 6px;font-size:14px;color:#6d7d70;line-height:1.9}
+.nl-policy-body article>.nl-underline-link{margin-top:35px}
+/* Existing commerce pages also get consistent, polished spacing and surfaces */
+.product-card{transition:transform .25s}
+.product-visual{background:#ebece8}
+.product-meta{color:#879382}
+.product-caption a{font-weight:600}
+.product-card:hover .product-caption a{color:#6d8766}
+.product-tag{background:#fffdf5;border:1px solid #e7e5dc}
+.quick-add{background:#f9faf4;color:#233a2d;font-weight:700}
+.quick-add:hover{background:#dce8a5}
+.shop-hero{background:#e6ebe4}
+.catalog-sidebar{background:#f0f1ec;padding:23px}
+.catalog-section{padding-block:90px 120px}
+.catalog-grid{row-gap:42px}
+.product-panel{padding-bottom:38px}
+.product-main-img{background:#e6e8e0}
+.auth-panel{background:#f0f2ec}
+.account-page,.admin-page{min-height:650px}
+.footer{background:#1e3126;padding-top:100px}
+.footer-upper{gap:80px}
+.footer-intro h2{font-size:clamp(50px,4.6vw,75px)}
+.footer-wordmark{font-size:clamp(170px,26.6vw,440px);margin-top:90px}
+.footer-menus a{font-size:12px}
+.footer-bottom{font-size:8px}
+@media(max-width:1200px){
+ .container,.nl-article-hero{width:calc(100% - 64px)}
+ .main-nav{gap:16px;margin-left:auto;margin-right:15px}
+ .main-nav a{font-size:11px}
+ .logo{font-size:30px}
+ .nl-collections-grid{gap:13px}
+ .nl-collection-text h3{font-size:25px}
+ .nl-split-text{padding-left:5vw;padding-right:4vw}
+ .nl-journal-card>div:first-child{height:280px}
+ .nl-feature-page-hero{padding-block:90px}
+ .nl-contact-grid{gap:45px}
+ .nl-contact-form-wrap{padding:40px}
+}
+@media(max-width:900px){
+ .container,.nl-article-hero{width:calc(100% - 44px)}
+ .header{height:73px}
+ .main-nav{margin:0;gap:0}
+ .main-nav a{font-size:13px}
+ .nav-mobile-help{display:block!important}
+ .nl-hero{height:690px;min-height:650px}
+ .nl-hero-content{padding-top:170px}
+ .nl-hero h1{font-size:clamp(67px,9vw,98px)}
+ .nl-hero-vertical{display:none}
+ .nl-promises-grid{grid-template-columns:repeat(2,1fr);row-gap:20px}
+ .nl-promises-grid>div:nth-child(2){border:0}
+ .nl-section{padding-block:83px}
+ .nl-collections-grid{grid-template-columns:repeat(2,1fr);row-gap:42px}
+ .nl-collection-media{aspect-ratio:5/5.2}
+ .nl-editor-inner{gap:26px}
+ .nl-editor-signature{display:none}
+ .nl-split-feature{grid-template-columns:1fr 1fr}
+ .nl-split-image{min-height:550px}
+ .nl-split-text{padding:85px 28px 85px 35px}
+ .nl-split-text h2{font-size:57px}
+ .nl-lookbook-tile{height:390px}
+ .nl-journal-card>div:first-child{height:220px}
+ .nl-contact-grid{grid-template-columns:1fr 1.2fr;gap:25px}
+ .nl-faq-body{grid-template-columns:220px 1fr;gap:30px}
+ .nl-lookbook-story{gap:40px}
+ .nl-lookbook-story-photo{height:450px}
+ .nl-long-page .nl-article-hero{height:510px}
+}
+@media(max-width:640px){
+ .container,.nl-article-hero{width:calc(100% - 36px)}
+ .header{height:65px}
+ .logo{font-size:30px}
+ .nl-hero{height:690px;min-height:640px}
+ .nl-hero-bg img{object-position:62% 50%}
+ .nl-hero-shade{background:linear-gradient(90deg,#10251ac9,#102c1ba5 45%,#102d1738 100%),linear-gradient(0deg,#0c2417b0,transparent 40%)}
+ .nl-hero-content{padding-top:170px}
+ .nl-hero h1{font-size:clamp(57px,12.7vw,83px);margin:21px 0 26px}
+ .nl-hero-small{font-size:8px;letter-spacing:.12em}
+ .nl-hero-small>span{width:20px}
+ .nl-hero-content>p{font-size:13px;max-width:310px}
+ .nl-hero-buttons{flex-direction:column;align-items:flex-start;gap:26px}
+ .nl-hero-foot{bottom:20px;font-size:8px}
+ .nl-hero-foot>span:last-child{display:none}
+ .nl-promises-grid{padding-block:23px;gap:22px 11px}
+ .nl-promises-grid>div{gap:9px;border:0;padding:0}
+ .nl-promises-grid svg{height:21px;width:21px}
+ .nl-promises-grid strong{font-size:10px}
+ .nl-promises-grid small{font-size:9px}
+ .nl-section{padding-block:74px}
+ .nl-section-head{display:block;margin-bottom:28px}
+ .nl-section-head h2{font-size:clamp(43px,10.7vw,59px);margin-top:17px}
+ .nl-section-head-right{width:auto;margin:17px 0 0}
+ .nl-section-head-right p{font-size:13px;margin-bottom:15px}
+ .nl-kicker{font-size:9px}
+ .nl-collections-grid{gap:28px 13px}
+ .nl-collection-media{aspect-ratio:3/4}
+ .nl-collection-index{top:7px;left:7px;padding:6px;font-size:7px}
+ .nl-collection-text{padding-top:13px;align-items:start}
+ .nl-collection-text span:not(.nl-circle-arrow){font-size:8px}
+ .nl-collection-text h3{font-size:22px;margin-top:6px}
+ .nl-circle-arrow{width:30px;height:30px;flex-shrink:0}
+ .nl-circle-arrow svg{height:16px}
+ .nl-editor-note{padding:40px 0}
+ .nl-editor-inner{display:block}
+ .nl-editor-mark{font-size:41px;margin-bottom:20px;display:block}
+ .nl-editor-mark span{font-size:24px}
+ .nl-editor-inner p{font-size:20px}
+ .nl-category-chips{gap:6px}
+ .nl-category-chips button{font-size:10px;padding:9px 13px}
+ .nl-catalog-status{font-size:10px;line-height:1.6}
+ .nl-center-cta{margin-top:35px}
+ .nl-split-feature{display:block}
+ .nl-split-image{min-height:365px;height:365px}
+ .nl-split-text{padding:70px 25px 95px}
+ .nl-split-text h2{font-size:66px}
+ .nl-split-text p{font-size:13px}
+ .nl-feature-number{bottom:23px}
+ .nl-wide-promo{height:545px}
+ .nl-wide-promo>img{object-position:60%}
+ .nl-wide-content{padding-top:102px}
+ .nl-wide-content h2{font-size:67px}
+ .nl-wide-content>p{font-size:13px}
+ .nl-lookbook-grid{gap:15px}
+ .nl-lookbook-tile{height:315px}
+ .nl-lookbook-tile>div{bottom:17px;left:13px;right:13px}
+ .nl-lookbook-tile small{font-size:8px}
+ .nl-lookbook-tile h3{font-size:23px;line-height:1.1}
+ .nl-lookbook-tile svg{width:18px;height:18px}
+ .nl-quote-band{padding:65px 0}
+ .nl-quote-band h2{font-size:39px}
+ .nl-journal-grid{grid-template-columns:1fr;gap:39px}
+ .nl-journal-card>div:first-child{height:310px}
+ .nl-journal-card h3{font-size:29px}
+ .nl-bottom-banner{padding-block:65px}
+ .nl-bottom-banner>.container{display:block}
+ .nl-bottom-banner h2{font-size:55px;margin-bottom:28px}
+ .nl-feature-page-hero{padding-block:68px 76px}
+ .nl-feature-page-hero h1{font-size:clamp(59px,12vw,80px)}
+ .nl-feature-page-hero p{font-size:13px}
+ .nl-lookbook-page-grid{padding-top:65px;gap:68px}
+ .nl-lookbook-story,.nl-lookbook-story:nth-child(even){display:flex;flex-direction:column;gap:25px;align-items:stretch;min-height:0}
+ .nl-lookbook-story:nth-child(even) .nl-lookbook-story-photo{order:0}
+ .nl-lookbook-story-photo{height:360px}
+ .nl-lookbook-story-copy h2{font-size:43px;margin:13px 0}
+ .nl-lookbook-story-copy p{font-size:13px}
+ .nl-page-closer{padding:90px 0}
+ .nl-page-closer h2{font-size:46px}
+ .nl-article-heading{padding-block:60px 38px}
+ .nl-article-heading>.nl-underline-link{margin-bottom:30px}
+ .nl-article-heading h1{font-size:54px}
+ .nl-article-heading>p{font-size:14px}
+ .nl-long-page .nl-article-hero{height:320px}
+ .nl-article-content{padding:40px 0 75px}
+ .nl-article-intro{font-size:18px!important}
+ .nl-article-content h2{font-size:27px}
+ .nl-article-content section p{font-size:14px}
+ .nl-article-related{padding-bottom:80px}
+ .nl-contact-grid{display:block;padding-block:65px 90px}
+ .nl-contact-details>h2{font-size:43px}
+ .nl-contact-details>p{font-size:13px;margin-bottom:22px}
+ .nl-contact-method{padding-block:20px}
+ .nl-contact-help{margin:25px 0 35px}
+ .nl-contact-form-wrap{padding:30px 21px}
+ .nl-contact-form h2{font-size:30px}
+ .nl-contact-form .form-grid{gap:9px}
+ .nl-faq-body{display:block;padding-block:65px 90px}
+ .nl-faq-menu{margin-bottom:50px}
+ .nl-faq-aside-card{display:none}
+ .nl-faq-answers h2{font-size:43px}
+ .nl-faq-row>button{font-size:14px;padding:21px 0}
+ .nl-faq-row>p{font-size:12px}
+ .nl-policy-body{display:block;padding-block:65px 95px}
+ .nl-policy-side{margin-bottom:45px;gap:11px}
+ .nl-policy-body article>section{grid-template-columns:30px 1fr;gap:10px}
+ .nl-policy-body article h2{font-size:24px}
+ .nl-policy-body article section p{font-size:12px}
+ .footer{padding-top:75px}
+ .footer-intro h2{font-size:56px}
+ .footer-menus>div:nth-child(3){grid-column:auto}
+ .footer-menus{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .footer-wordmark{font-size:29vw;margin-top:80px}
+}
+@media(max-width:390px){.nl-hero h1{font-size:54px}.nl-collection-text h3{font-size:20px}.nl-lookbook-tile{height:255px}.nl-lookbook-tile h3{font-size:19px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+.admin-metrics-extra{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:17px}
+.admin-metrics-extra>div{border:1px solid #d7dfd5;padding:20px 28px;display:flex;align-items:center;gap:15px;background:#f4f5f0}
+.admin-metrics-extra strong{font-size:32px;letter-spacing:-.04em}
+.admin-metrics-extra span{font-size:12px;color:#718270}
+.nl-admin-message{max-width:330px;white-space:normal;line-height:1.7}
+@media(max-width:640px){.admin-metrics-extra>div{padding:15px;display:block}.admin-metrics-extra strong{display:block;margin-bottom:5px}.admin-metrics-extra span{font-size:10px}}
+.nl-cart-title{background:#e6ebe4;padding:77px 0 68px}
+.nl-cart-title h1{font-size:clamp(60px,7vw,100px);line-height:1;letter-spacing:-.07em;font-weight:500;margin:20px 0}
+.nl-cart-title p{color:#6b7c6e;font-size:14px}
+.nl-cart-main{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:80px;padding-block:85px 125px;align-items:start}
+.nl-cart-lines-heading{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #cdd6ca;padding-bottom:18px;font-size:10px;font-weight:700;letter-spacing:.13em}
+.nl-cart-line{display:grid;grid-template-columns:145px 1fr 130px;gap:25px;padding:28px 0;border-bottom:1px solid #dce1d9}
+.nl-cart-line-image{background:#e7eae2;height:157px;overflow:hidden}
+.nl-cart-line-image img{height:100%;width:100%;object-fit:cover}
+.nl-cart-line-info h2{font-size:21px;font-weight:600;letter-spacing:-.04em;margin:12px 0 7px}
+.nl-cart-line-info p{font-size:13px;color:#7a8a7e;margin:0 0 21px}
+.nl-cart-remove{display:flex;align-items:center;gap:7px;border:0;background:none;padding:0;color:#819080;font-size:11px}
+.nl-cart-line-actions{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between}
+.nl-cart-line-actions strong{font-size:15px}
+.nl-back-to-shop{margin-top:30px}
+.nl-cart-summary{background:#edf0e8;padding:33px;position:sticky;top:110px}
+.nl-cart-summary h2{font-size:27px;font-weight:550;letter-spacing:-.04em;margin:0 0 32px}
+.nl-cart-summary-row{display:flex;justify-content:space-between;padding:9px 0;color:#56695a;font-size:13px}
+.nl-cart-shipping{display:flex;gap:11px;margin:24px 0 13px;color:#627962;font-size:11px;line-height:1.5}
+.nl-cart-summary .shipping-track{margin-bottom:28px}
+.nl-cart-summary-total{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #cad4c8;padding-top:25px;margin-top:24px;font-size:13px}
+.nl-cart-summary-total strong{font-size:23px}
+.nl-cart-checkout{display:flex;justify-content:space-between;align-items:center;background:#253b2d;color:white;font-weight:750;font-size:12px;padding:19px;margin-top:25px}
+.nl-cart-checkout:hover{background:#455c46}
+.nl-cart-summary>p{display:flex;align-items:center;gap:8px;font-size:11px;color:#627562;margin-top:17px}
+.nl-cart-summary>small{font-size:10px;line-height:1.7;display:block;color:#7c8b7a}
+.nl-cart-empty{text-align:center;padding:115px 0}
+.nl-cart-empty svg{margin-inline:auto;color:#778b78}
+.nl-cart-empty h2{font-size:40px;letter-spacing:-.05em;font-weight:500;margin:23px auto}
+.nl-cart-empty p{color:#7c8b7a;line-height:1.8;max-width:440px;margin:0 auto 28px}
+.nl-cart-empty .nl-action-primary{background:#243b2d;color:white}
+.nl-cart-related{padding-top:0}
+.nl-cart-related>h2{font-size:50px;letter-spacing:-.06em;font-weight:500;margin:18px 0 39px}
+@media(max-width:950px){.nl-cart-main{grid-template-columns:1fr 320px;gap:24px}.nl-cart-line{grid-template-columns:110px 1fr 100px;gap:16px}.nl-cart-line-image{height:135px}.nl-cart-summary{padding:25px}}
+@media(max-width:680px){.nl-cart-title{padding-block:55px}.nl-cart-title h1{font-size:65px}.nl-cart-main{display:flex;flex-direction:column;padding-block:48px 90px}.nl-cart-lines,.nl-cart-summary{width:100%}.nl-cart-summary{position:static}.nl-cart-line{grid-template-columns:95px 1fr 75px;gap:12px}.nl-cart-line-image{height:110px}.nl-cart-line-info h2{font-size:16px;margin:7px 0}.nl-cart-line-info p{font-size:11px;margin-bottom:15px}.nl-cart-line-actions strong{font-size:12px}.nl-cart-line-actions .qty-small{transform:scale(.9);transform-origin:bottom right}.nl-cart-related>h2{font-size:37px}.nl-cart-empty h2{font-size:33px}}
+
+/* Transactional email center - NORTHLINE V4 */
+.nl-mail-confirmation{background:#ecf0e8;border-left:3px solid #547363;padding:14px 18px;max-width:560px!important;margin:18px auto!important;font-size:14px;line-height:1.65}
+.mail-admin .admin-section-header{gap:20px;flex-wrap:wrap}
+.nl-mail-settings{margin:28px 0 40px;background:#f3f2ed;border:1px solid #e2e4d9;padding:27px 30px}
+.nl-mail-config{display:flex;gap:18px;align-items:flex-start;justify-content:space-between}
+.nl-mail-config>svg{flex-shrink:0;color:#3a5947}
+.nl-mail-config>div{flex:1}
+.nl-mail-config strong{font-size:19px}
+.nl-mail-config p{color:#6e7970;font-size:14px;line-height:1.6;margin:8px 0 0}
+.nl-mail-status{display:inline-flex;align-items:center;white-space:nowrap;letter-spacing:.07em;text-transform:uppercase;font-size:10px;font-weight:800;padding:7px 10px;background:#edf0e6;color:#4b6348}
+.nl-mail-status.sent{background:#e4f0e6;color:#2e6943}
+.nl-mail-status.failed{background:#f8e9e4;color:#a44e36}
+.nl-mail-status.retry,.nl-mail-status.pending,.nl-mail-status.sending{background:#f7edd8;color:#8d6533}
+.nl-mail-destinations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;border-top:1px solid #d7dbd0;margin-top:22px;padding-top:24px}
+.nl-mail-destinations>div{min-width:0;display:flex;flex-direction:column;gap:10px}
+.nl-mail-destinations small{font-size:10px;color:#788579;font-weight:700;letter-spacing:.09em}
+.nl-mail-destinations b{font-size:13px;overflow-wrap:anywhere}
+.nl-mail-retry{display:inline-flex;align-items:center;gap:7px;font-weight:700}
+.nl-mail-error{display:block;color:#a44e36;max-width:200px;white-space:normal;line-height:1.4;margin-top:6px}
+.nl-mail-note{font-size:13px;line-height:1.7;color:#647269;margin:24px 0}
+@media(max-width:780px){.nl-mail-destinations{grid-template-columns:1fr}.nl-mail-settings{padding:20px}.nl-mail-config{flex-wrap:wrap}.nl-mail-config .nl-mail-status{margin-left:40px}}
+/* V5 account and authentication refinements */
+.main-nav a.active{color:#1b3225}
+.nl-signout-btn{display:inline-flex;gap:11px;align-items:center;justify-content:center;border:1px solid #315343;background:#243c30;color:#fff;padding:13px 18px;min-height:48px;font-size:12px;font-weight:700;letter-spacing:.015em;cursor:pointer;transition:background .25s,transform .25s,border-color .25s;white-space:nowrap}
+.nl-signout-btn:hover{background:#45694d;border-color:#45694d;transform:translateY(-2px)}
+.nl-signout-btn:focus-visible,.nl-social-btn:focus-visible,.nl-auth-tabs button:focus-visible,.nl-subtle-link:focus-visible{outline:3px solid #b2cb8d;outline-offset:3px}
+.nl-signout-btn svg:last-child{opacity:.74}
+.nl-auth-v5{max-width:485px}
+.nl-auth-v5 h1{font-size:clamp(42px,4vw,63px);line-height:1.05;margin-bottom:20px}
+.nl-auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#e7eae2;padding:5px;margin:28px 0 25px}
+.nl-auth-tabs button{border:0;background:transparent;color:#637368;min-height:45px;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;font-size:12px;font-weight:700;transition:all .2s}
+.nl-auth-tabs button.on{background:#fff;color:#1c3327;box-shadow:0 2px 10px #142c1412}
+.nl-auth-form label,.nl-phone-flow label,.nl-recovery-card form>label{display:block;margin-bottom:18px;color:#3b5244;font-size:10px;font-weight:800;letter-spacing:.08em}
+.nl-auth-form label input,.nl-phone-flow label input,.nl-recovery-card label input{margin-top:9px;width:100%;min-height:51px;border:1px solid #ccd6cb;border-radius:0;background:#fff;padding:13px 16px;font-family:inherit;font-size:14px;color:#1b3225;transition:border-color .2s,box-shadow .2s}
+.nl-auth-form input:focus,.nl-phone-flow input:focus,.nl-recovery-card input:focus{outline:0;border-color:#708969;box-shadow:0 0 0 3px #8aaa8040}
+.nl-password-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;color:#3b5244;font-size:10px;letter-spacing:.08em;font-weight:800;margin:3px 0 9px}
+.nl-password-heading a{font-size:12px;letter-spacing:0;font-weight:700;color:#376749;text-decoration:underline;text-underline-offset:4px}
+.nl-auth-form .password-field{position:relative;margin-bottom:22px}
+.nl-auth-form .password-field input{margin-top:0;padding-right:49px}
+.nl-auth-form .password-field button,.nl-recovery-card .password-field button{border:none;background:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;color:#50685a;padding:8px}
+.nl-auth-submit{margin-top:4px;min-height:54px}
+.nl-auth-divider{display:flex;align-items:center;gap:15px;margin:26px 0 18px;color:#78877c;font-size:10px;letter-spacing:.12em;font-weight:800;white-space:nowrap}
+.nl-auth-divider:before,.nl-auth-divider:after{content:'';height:1px;flex:1;background:#c9d2c7}
+.nl-social-btn{background:#fff;color:#1f3529;border:1px solid #cbd6ca;width:100%;min-height:52px;display:flex;align-items:center;gap:13px;padding:12px 17px;margin-bottom:10px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:750;transition:border-color .2s,transform .2s,box-shadow .2s}
+.nl-social-btn svg:last-child{margin-left:auto}
+.nl-social-btn:hover{border-color:#849c80;transform:translateY(-1px);box-shadow:0 7px 22px #172e2012}
+.nl-social-btn:disabled{opacity:.6;cursor:wait}
+.nl-auth-v5 .auth-toggle{text-align:center;margin:20px 0 25px;font-size:13px}
+.nl-auth-v5 .auth-footnote{display:flex;align-items:center;justify-content:center;gap:7px;line-height:1.65;font-size:10px;color:#89978a;text-align:center}
+.nl-setup-hint{font-size:11px!important;line-height:1.65!important;padding:12px 14px;background:#e9e7d6;color:#6a674c!important;border-left:3px solid #aea77b;margin:12px 0}
+.nl-provider-info{background:#e4eadf;display:flex;align-items:center;gap:12px;padding:14px;font-size:12px;color:#496552;line-height:1.6;margin:12px 0 25px}
+.nl-phone-flow>form{display:grid;gap:14px}
+.nl-phone-flow form>p{font-size:13px;color:#677b6d;line-height:1.7;margin:0}
+.nl-subtle-link{display:inline-flex;align-items:center;gap:7px;border:0;background:transparent;cursor:pointer;padding:13px 0;color:#416b51;text-decoration:underline;text-underline-offset:4px;font-size:12px;font-family:inherit}
+.nl-recovery-page{background:linear-gradient(142deg,#e5ebe0,#f9f8f2);min-height:75vh;padding:90px 22px 110px;display:grid;place-items:center}
+.nl-recovery-card{width:100%;max-width:560px;padding:53px clamp(24px,5vw,60px);background:#fff;box-shadow:0 20px 65px #233b2720}
+.nl-recovery-back{display:flex;gap:7px;align-items:center;font-size:12px;font-weight:700;color:#526959;margin-bottom:37px}
+.nl-recovery-icon{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:#eaf0e3;color:#2a5138;margin-bottom:28px}
+.nl-recovery-card h1{font-size:clamp(39px,4vw,58px);letter-spacing:-.065em;line-height:1.08;margin:13px 0 18px}
+.nl-recovery-card>p{color:#647368;font-size:14px;line-height:1.8;margin-bottom:28px}
+.nl-recovery-card .nl-code-input{font-size:25px;letter-spacing:.28em;font-weight:800;text-align:center;font-variant-numeric:tabular-nums}
+.nl-recovery-card .password-field{position:relative}
+.nl-recovery-card .password-field input{padding-right:54px}
+.nl-recovery-card .btn{margin-top:17px;min-height:54px}
+.nl-recovery-footnote{display:flex;gap:11px;align-items:start;padding-top:25px;margin-top:28px;border-top:1px solid #e1e8e0;color:#748475;font-size:11px;line-height:1.7}
+.nl-recovery-footnote svg{flex-shrink:0}
+.nl-mail-confirmation{padding:15px 18px;background:#e8eee3!important;color:#39523e!important;border:1px solid #d7e4d2;line-height:1.7}
+@media(max-width:640px){.nl-signout-btn{margin-top:19px;width:100%;max-width:210px}.nl-auth-v5 h1{font-size:44px}.nl-recovery-page{padding:40px 15px 80px;min-height:65vh}.nl-recovery-card{padding:35px 24px}.nl-recovery-card h1{font-size:44px}.nl-auth-divider{margin-block:19px}}
+@media(prefers-reduced-motion:reduce){.nl-signout-btn,.nl-social-btn{transition:none}.nl-signout-btn:hover,.nl-social-btn:hover{transform:none}}
+
+/* Prevent eight primary links from colliding at small laptop widths. */
+@media(min-width:901px) and (max-width:1120px){
+ .header{height:73px}.header-inner{gap:14px}.mobile-only{display:flex}.main-nav{display:none;position:absolute;left:0;right:0;top:73px;background:#faf9f6;padding:22px 32px;flex-direction:column;align-items:stretch;margin:0;gap:0;z-index:75;box-shadow:0 20px 35px #0002}.main-nav.open{display:flex}.main-nav a{font-size:13px;padding:14px;border-bottom:1px solid #e6e8e2}.nav-backdrop{display:block;position:fixed;inset:107px 0 0;background:#0b21167a;z-index:68}.header-icons{margin-left:auto}.logo{margin-left:10px}
+}

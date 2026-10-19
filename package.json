@@ -1,0 +1,19 @@
+{
+  "name": "codealpha-northline-mern",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently -n api,web -c cyan,green \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "npm start --prefix server",
+    "postinstall": "npm install --prefix server && npm install --prefix client",
+    "seed": "npm run seed --prefix server",
+    "setup": "node scripts/setup.mjs",
+    "check:email": "npm run check:email --prefix server",
+    "migrate:auth": "npm run migrate:auth --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "version": "5.0.0"
+}

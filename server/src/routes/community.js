@@ -1,0 +1,15 @@
+import {Router} from 'express';
+import {z} from 'zod';
+import rateLimit from 'express-rate-limit';
+import Contact from '../models/Contact.js';
+import Subscriber from '../models/Subscriber.js';
+import {auth,admin} from '../middleware/auth.js';
+const router=Router();
+const limiter=rateLimit({windowMs:15*60*1000,limit:10,standardHeaders:'draft-7',legacyHeaders:false});
+const msg=z.object({name:z.string().trim().min(2).max(80),email:z.string().trim().email().max(150),subject:z.enum(['Product question','Order support','Shipping and returns','General enquiry','Other']),orderNumber:z.string().trim().max(40).optional(),message:z.string().trim().min(10).max(2000)});
+router.post('/contact',limiter,async(req,res,next)=>{try{const data=msg.parse(req.body);const entry=await Contact.create(data);res.status(201).json({ok:true,id:entry._id})}catch(e){next(e)}});
+router.post('/newsletter',limiter,async(req,res,next)=>{try{const {email}=z.object({email:z.string().trim().email().max(150)}).parse(req.body);await Subscriber.updateOne({email:email.toLowerCase()},{$setOnInsert:{email:email.toLowerCase(),consent:true}},{upsert:true});res.status(201).json({ok:true})}catch(e){next(e)}});
+router.get('/admin/messages',auth,admin,async(req,res,next)=>{try{res.json({messages:await Contact.find().sort({createdAt:-1}).limit(200)})}catch(e){next(e)}});
+router.patch('/admin/messages/:id',auth,admin,async(req,res,next)=>{try{const {status}=z.object({status:z.enum(['new','read','resolved'])}).parse(req.body);const record=await Contact.findByIdAndUpdate(req.params.id,{status},{new:true});if(!record)return res.status(404).json({message:'Message not found'});res.json({message:record})}catch(e){next(e)}});
+router.get('/admin/newsletter',auth,admin,async(req,res,next)=>{try{res.json({subscribers:await Subscriber.countDocuments()})}catch(e){next(e)}});
+export default router;

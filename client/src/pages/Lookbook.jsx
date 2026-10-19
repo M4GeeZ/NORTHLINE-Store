@@ -1,0 +1,11 @@
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {ArrowUpRight} from 'lucide-react';
+const img=(id,w=1200)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`;
+const rooms=[
+ {name:'A softer place to land',type:'THE CALM EDIT',category:'Living',photo:'photo-1616486338812-3dadae4b4ace',copy:'Living spaces do their best work when they make you slow down. Try layered textures, a generously sized chair and an inviting pool of light.'},
+ {name:'The light you live in',type:'LIGHT, RECONSIDERED',category:'Lighting',photo:'photo-1507473885765-e6ed057f782c',copy:'Let every light source do something different. A lamp by the sofa, softer light near the dining table and a little glow after sundown.'},
+ {name:'Make gathering effortless',type:'THE TABLE EDIT',category:'Dining',photo:'photo-1495474472287-4d71bcdd2085',copy:'The best tables feel relaxed. Keep materials simple, invite different shapes and leave room for an extra guest.'},
+ {name:'Details worth noticing',type:'THE FINISHING TOUCH',category:'Accessories',photo:'photo-1603006905003-be475563bc59',copy:'A handmade-looking vase. A well-placed mirror. Objects that say a little about who you are without saying too much.'}
+];
+export default function Lookbook(){return <div className="nl-long-page"><section className="nl-feature-page-hero"><div className="container"><div className="nl-kicker"><i/> THE NORTHLINE LOOKBOOK</div><h1>Considered spaces.<br/><em>Personal stories.</em></h1><p>Thoughts, palettes and product ideas for making somewhere feel like your place.</p></div></section><div className="container nl-lookbook-page-grid">{rooms.map((r,i)=><article className={'nl-lookbook-story nl-lookbook-story-'+i} key={r.name}><div className="nl-lookbook-story-photo"><img src={img(r.photo)} loading="lazy" alt={r.name}/></div><div className="nl-lookbook-story-copy"><span className="nl-kicker">0{i+1} / {r.type}</span><h2>{r.name}</h2><p>{r.copy}</p><Link className="nl-underline-link" to={'/shop?category='+r.category}>Explore {r.category.toLowerCase()} <ArrowUpRight size={17}/></Link></div></article>)}</div><div className="container nl-page-closer"><h2>Every room has a story.<br/><em>Make yours feel like you.</em></h2><Link className="nl-action-primary" to="/shop">Explore the collection <ArrowUpRight size={19}/></Link></div></div>}
