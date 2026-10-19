@@ -21,6 +21,7 @@ import { startMailWorker } from './services/mail.js';
 
 const app = express();
 app.disable('x-powered-by');
+app.set('trust proxy', 1);
 app.use(helmet());
 const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173')
   .split(',').map(origin => origin.trim()).filter(Boolean);
