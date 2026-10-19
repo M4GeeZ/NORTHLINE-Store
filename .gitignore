@@ -3,3 +3,11 @@ dist/
 .env
 .DS_Store
 *.log
+# Never commit Firebase Admin credentials or local secrets.
+*firebase-adminsdk*.json
+*service-account*.json
+.env.*.local
+
+# Ignore other local environment files without excluding examples.
+.env.*
+!.env.example

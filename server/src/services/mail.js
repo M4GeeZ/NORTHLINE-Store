@@ -60,6 +60,8 @@ export async function queueOrderEmails(order, user) {
   }
   const outcomes=await Promise.allSettled(jobs.map(queueMail));
   for(const outcome of outcomes)if(outcome.status==='rejected')console.error('[MAIL] Could not queue order email:',outcome.reason.message);
+  // Vercel freezes the runtime after a response; flush transactional mail while the request is active.
+  if (process.env.VERCEL && emailConfigured()) await processMailQueue();
   return {queued:outcomes.filter(x=>x.status==='fulfilled').length, total:jobs.length, customerQueued:outcomes[0]?.status==='fulfilled', ownerQueued:outcomes[1]?.status==='fulfilled', configured:emailConfigured()};
 }
 export async function queueCartEmail({eventId, product, quantity, finish, user}) {
@@ -72,6 +74,7 @@ export async function queueCartEmail({eventId, product, quantity, finish, user})
     text:`A shopper added a product to their cart.\nShopper: ${visitor}\nProduct: ${product.name}\nQuantity: ${quantity}\nFinish: ${finish||'Standard'}\nValue: ${total}\n\nThis is cart activity, NOT a placed order.`,
     html:frame('Someone added to their bag.',`A visitor has added a NORTHLINE item to their shopping bag. This is not yet an order.`,`<div style="background:#eff0ea;padding:22px;line-height:1.9"><strong>${esc(product.name)}</strong><br><span>Quantity: ${Number(quantity)}</span><br><span>Finish: ${esc(finish||'Standard')}</span><br><span>Cart value: ${esc(total)}</span><br><span>Shopper: ${esc(visitor)}</span></div>`)
   });
+  if (process.env.VERCEL && emailConfigured()) await processMailQueue();
   return true;
 }
 export async function queueTestEmail() {
@@ -83,6 +86,7 @@ export async function queueTestEmail() {
     text:'Your NORTHLINE Gmail notifications are connected. You will receive shopping bag and order alerts here.',
     html:frame('Email alerts are connected.','This is a test email from your NORTHLINE server.','<p style="padding:18px;background:#eff0ea">Your order and shopping bag email notifications are ready.</p>')
   });
+  if (process.env.VERCEL && emailConfigured()) await processMailQueue();
 }
 let active=false, timer=null;
 export async function processMailQueue(){
@@ -111,6 +115,8 @@ export async function processMailQueue(){
   }catch(e){console.error('[MAIL] Queue worker error:',e.message)}finally{active=false}
 }
 export function requestDelivery(){
+  // Fire-and-forget is unsafe in Vercel functions: callers flush explicitly.
+  if (process.env.VERCEL) return;
   if(emailConfigured())setImmediate(()=>{void processMailQueue()});
 }
 export function startMailWorker(){

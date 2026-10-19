@@ -7,7 +7,7 @@ import User from '../models/User.js';
 import Product from '../models/Product.js';
 import MailJob from '../models/MailJob.js';
 import {auth,admin} from '../middleware/auth.js';
-import {emailInfo,queueCartEmail,queueTestEmail,requestDelivery} from '../services/mail.js';
+import {emailInfo,queueCartEmail,queueTestEmail,requestDelivery,processMailQueue} from '../services/mail.js';
 
 const router=Router();
 const cartLimiter=rateLimit({windowMs:15*60*1000,limit:15,standardHeaders:'draft-7',legacyHeaders:false});
@@ -54,7 +54,8 @@ router.post('/admin/email-notifications/:id/retry',auth,admin,async(req,res,next
     if(!mongoose.isValidObjectId(req.params.id))return res.status(400).json({message:'Invalid ID.'});
     const job=await MailJob.findOneAndUpdate({_id:req.params.id,status:{$in:['failed','retry']}},{$set:{status:'pending',attempts:0,lastError:'',nextAttemptAt:new Date()}},{new:true});
     if(!job)return res.status(409).json({message:'Only failed or retrying emails can be restarted.'});
-    requestDelivery();res.json({message:'Email retry queued.'});
+    if (process.env.VERCEL) await processMailQueue(); else requestDelivery();
+    res.json({message:'Email retry queued.'});
   }catch(e){next(e)}
 });
 export default router;

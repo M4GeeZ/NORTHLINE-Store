@@ -7,7 +7,7 @@ import rateLimit from 'express-rate-limit';
 import User from '../models/User.js';
 import PasswordReset from '../models/PasswordReset.js';
 import {auth} from '../middleware/auth.js';
-import {queueMail,emailConfigured} from '../services/mail.js';
+import {queueMail,emailConfigured,processMailQueue} from '../services/mail.js';
 import {verifyFirebaseToken} from '../services/firebase.js';
 
 const router=Router();
@@ -73,6 +73,7 @@ router.post('/forgot/request',recoveryLimit,async(req,res,next)=>{try{
     subject:'NORTHLINE | Your password reset code',
     text:`Your NORTHLINE verification code is ${code}. This code expires in 10 minutes. If you didn't request this, you can ignore this email. Do not share this code.`,
     html:`<div style="background:#f3f2ed;padding:36px 16px;font-family:Arial,sans-serif;color:#20382b"><div style="max-width:540px;background:#fff;margin:auto;padding:35px"><h2>NORTHLINE ✳</h2><h1>Reset your password</h1><p>Use this one-time code to reset your NORTHLINE account password:</p><div style="font-size:37px;font-weight:700;letter-spacing:12px;text-align:center;background:#eaf0e6;padding:24px;margin:20px 0">${code}</div><p>Expires in 10 minutes. Never share this code with anyone.</p><p>If you didn't request this, ignore this email.</p></div></div>`});
+   if (process.env.VERCEL) await processMailQueue();
   }
  }
  res.json({message:errorText});
