@@ -61,8 +61,14 @@ export async function queueOrderEmails(order, user) {
   const outcomes=await Promise.allSettled(jobs.map(queueMail));
   for(const outcome of outcomes)if(outcome.status==='rejected')console.error('[MAIL] Could not queue order email:',outcome.reason.message);
   // Vercel freezes the runtime after a response; flush transactional mail while the request is active.
-  if (process.env.VERCEL && emailConfigured()) await processMailQueue();
-  return {queued:outcomes.filter(x=>x.status==='fulfilled').length, total:jobs.length, customerQueued:outcomes[0]?.status==='fulfilled', ownerQueued:outcomes[1]?.status==='fulfilled', configured:emailConfigured()};
+  if (process.env.VERCEL && emailConfigured()) await processMailQueue(jobs.map(job=>job.dedupeKey),jobs.length);
+  const records=await MailJob.find({dedupeKey:{$in:jobs.map(job=>job.dedupeKey)}}).select('dedupeKey status').lean();
+  const delivery=new Map(records.map(record=>[record.dedupeKey,record.status]));
+  return {queued:outcomes.filter(x=>x.status==='fulfilled').length, total:jobs.length,
+    customerQueued:outcomes[0]?.status==='fulfilled', ownerQueued:outcomes[1]?.status==='fulfilled',
+    customerDelivery:delivery.get(customer.dedupeKey)||'pending',
+    ownerDelivery:jobs[1]?(delivery.get(jobs[1].dedupeKey)||'pending'):null,
+    configured:emailConfigured()};
 }
 export async function queueCartEmail({eventId, product, quantity, finish, user}) {
   if(!OWNER_EMAIL())return false;
@@ -89,17 +95,21 @@ export async function queueTestEmail() {
   if (process.env.VERCEL && emailConfigured()) await processMailQueue();
 }
 let active=false, timer=null;
-export async function processMailQueue(){
+export async function processMailQueue(priorityKeys=[],maxJobs=8){
   if(active || !emailConfigured())return;
   active=true;
   try{
-    for(let i=0;i<8;i++){
+    for(let i=0;i<maxJobs;i++){
       const now=new Date();
-      const job=await MailJob.findOneAndUpdate({$or:[
+      const due={$or:[
         {status:'pending',nextAttemptAt:{$lte:now}},
         {status:'retry',nextAttemptAt:{$lte:now}},
         {status:'sending',updatedAt:{$lte:new Date(Date.now()-5*60*1000)}}
-      ]},{$set:{status:'sending',lastError:''},$inc:{attempts:1}},{sort:{createdAt:1},new:true});
+      ]};
+      const claim=filter=>MailJob.findOneAndUpdate(filter,{$set:{status:'sending',lastError:''},$inc:{attempts:1}},{sort:{createdAt:1},new:true});
+      const job=priorityKeys.length
+        ? await claim({...due,dedupeKey:{$in:priorityKeys}})
+        : await claim(due);
       if(!job)break;
       try{
         await mailer().sendMail({from:{name:BRAND,address:USER()},to:job.to,subject:job.subject,text:job.text,html:job.html});

@@ -1,11 +1,42 @@
-import React,{useEffect,useRef,useState} from 'react';
+import React,{useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {Link,NavLink,useLocation,useNavigate} from 'react-router-dom';
 import {ArrowRight,ArrowUpRight,ChevronDown,Facebook,Heart,Instagram,Menu,Minus,Package,Plus,Search,ShoppingBag,Trash2,Truck,UserRound,X} from 'lucide-react';
 import {api,useStore} from '../context/Store';
 import toast from 'react-hot-toast';
 import Lenis from 'lenis';
 export const money=n=>`$${Number(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
-function SmoothScroll(){const location=useLocation();useEffect(()=>{const motion=window.matchMedia('(prefers-reduced-motion: reduce)');if(motion.matches)return;let rafId;const lenis=new Lenis({duration:1.15,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,wheelMultiplier:.95});const raf=t=>{lenis.raf(t);rafId=requestAnimationFrame(raf)};rafId=requestAnimationFrame(raf);const anchors=e=>{const a=e.target.closest('a[href^="#"]');if(a?.hash)lenis.scrollTo(a.hash,{offset:-88})};document.addEventListener('click',anchors);return()=>{cancelAnimationFrame(rafId);document.removeEventListener('click',anchors);lenis.destroy()}},[]);useEffect(()=>{if(location.hash){setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView({behavior:'smooth',block:'start'}),60)}else{window.scrollTo({top:0,behavior:'instant'})}},[location.pathname,location.hash]);return null}
+function SmoothScroll(){
+ const location=useLocation();
+ const lenisRef=useRef(null);
+ useEffect(()=>{
+  const previous=window.history.scrollRestoration;
+  window.history.scrollRestoration='manual';
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced)return ()=>{window.history.scrollRestoration=previous};
+  let frame;
+  const lenis=new Lenis({duration:1.15,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,wheelMultiplier:.95});
+  lenisRef.current=lenis;
+  const raf=t=>{lenis.raf(t);frame=requestAnimationFrame(raf)};
+  frame=requestAnimationFrame(raf);
+  const anchorClick=e=>{const a=e.target.closest('a[href^="#"]');if(a?.hash)lenis.scrollTo(a.hash,{offset:-88})};
+  document.addEventListener('click',anchorClick);
+  return ()=>{cancelAnimationFrame(frame);document.removeEventListener('click',anchorClick);lenis.destroy();lenisRef.current=null;window.history.scrollRestoration=previous};
+ },[]);
+ useLayoutEffect(()=>{
+  const reset=()=>{lenisRef.current?.scrollTo(0,{immediate:true,force:true});window.scrollTo(0,0)};
+  reset();
+  const frame=requestAnimationFrame(()=>{
+   if(location.hash){
+    const id=decodeURIComponent(location.hash.slice(1));
+    const element=document.getElementById(id);
+    if(element){if(lenisRef.current)lenisRef.current.scrollTo(element,{offset:-88,immediate:true});else element.scrollIntoView({behavior:'instant'})}
+    else reset();
+   }else reset();
+  });
+  return ()=>cancelAnimationFrame(frame);
+ },[location.pathname,location.search,location.hash,location.key]);
+ return null;
+}
 function ScrollProgress(){const[width,setWidth]=useState(0);useEffect(()=>{let running=false;const update=()=>{if(running)return;running=true;requestAnimationFrame(()=>{let max=document.documentElement.scrollHeight-innerHeight;setWidth(max>0?Math.min(100,scrollY/max*100):0);running=false})};window.addEventListener('scroll',update,{passive:true});return()=>window.removeEventListener('scroll',update)},[]);return <div className="reading-progress" style={{width:width+'%'}}/>}
 function Header(){
  const {count,cartOpen,setCartOpen,searchOpen,setSearchOpen,wishlist,user}=useStore();
